@@ -1,0 +1,28 @@
+﻿@model financial_application.Models.TransferViewModel
+@{
+    ViewBag.Title = "Transfer Funds";
+}
+
+<h2>Transfer Funds</h2>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form asp-action="Transfer" method="post">
+    <div class="form-group">
+        <label asp-for="FromAccountId">From Account</label>
+        <select asp-for="FromAccountId" class="form-control" asp-items="@(new SelectList(ViewBag.Accounts, "AccountId", "AccountHolderName"))"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="ToAccountId">To Account</label>
+        <select asp-for="ToAccountId" class="form-control" asp-items="@(new SelectList(ViewBag.Accounts, "AccountId", "AccountHolderName"))"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount">Amount</label>
+        <input asp-for="Amount" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Transfer</button>
+</form>
