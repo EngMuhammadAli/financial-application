@@ -28,14 +28,15 @@ namespace financial_application.Controllers
 
             if (fromAccount == null || toAccount == null)
             {
-                ModelState.AddModelError("", "Invalid account details.");
+                TempData["SuccessMessage"] = "Invalid account details.!";
+
                 ViewBag.Accounts = _context.Accounts.ToList();
                 return View();
             }
 
             if (fromAccount.Balance < amount)
             {
-                ModelState.AddModelError("", "Insufficient balance.");
+                TempData["SuccessMessage"] = "Insufficient balance.!";
                 ViewBag.Accounts = _context.Accounts.ToList();
                 return View();
             }
